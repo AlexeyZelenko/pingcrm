@@ -34,7 +34,7 @@
 
 <script>
 import { Head, Link } from '@inertiajs/vue3'
-import Layout from '@/Shared/Layout.vue'
+import Layout from '@/Shared/Layout/DashboardLayout.vue'
 import TextInput from '@/Shared/TextInput.vue'
 import FileInput from '@/Shared/FileInput.vue'
 import SelectInput from '@/Shared/SelectInput.vue'

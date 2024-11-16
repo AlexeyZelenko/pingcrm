@@ -3,6 +3,8 @@
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SongsController;
 use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\OrganizationsController;
 use App\Http\Controllers\ReportsController;
@@ -14,13 +16,21 @@ use Illuminate\Support\Facades\Route;
 | Web Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| Здесь вы можете зарегистрировать веб-маршруты для своего приложения. Эти
+| маршруты загружаются RouteServiceProvider внутри группы, которая
+| содержит группу промежуточного программного обеспечения «web». Теперь создайте что-нибудь замечательное!
 |
 */
 
+// Home
+Route::get('/', [HomeController::class, 'index'])
+    ->name('home')
+    ->middleware('auth');
+
 // Auth
+
+Route::post('register', [AuthenticatedSessionController::class, 'register'])
+    ->name('register');
 
 Route::get('login', [AuthenticatedSessionController::class, 'create'])
     ->name('login')
@@ -35,9 +45,8 @@ Route::delete('logout', [AuthenticatedSessionController::class, 'destroy'])
 
 // Dashboard
 
-Route::get('/', [DashboardController::class, 'index'])
-    ->name('dashboard')
-    ->middleware('auth');
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->name('dashboard');
 
 // Users
 
@@ -140,3 +149,37 @@ Route::get('reports', [ReportsController::class, 'index'])
 Route::get('/img/{path}', [ImagesController::class, 'show'])
     ->where('path', '.*')
     ->name('image');
+
+// Songs
+
+Route::get('/songs', [SongsController::class, 'index'])
+    ->name('songs')
+    ->middleware('auth');
+
+Route::get('songs/create', [SongsController::class, 'create'])
+    ->name('songs.create')
+    ->middleware('auth');
+
+Route::post('songs', [SongsController::class, 'store'])
+    ->name('songs.store')
+    ->middleware('auth');
+
+Route::get('songs/{song}/edit', [SongsController::class, 'edit'])
+    ->name('songs.edit')
+    ->middleware('auth');
+
+Route::put('songs/{song}', [SongsController::class, 'update'])
+    ->name('songs.update')
+    ->middleware('auth');
+
+Route::delete('songs/{song}', [SongsController::class, 'destroy'])
+    ->name('songs.destroy')
+    ->middleware('auth');
+
+Route::put('songs/{song}/restore', [SongsController::class, 'restore'])
+    ->name('songs.restore')
+    ->middleware('auth');
+
+Route::get('songs/{song}/show', [SongsController::class, 'show'])
+    ->name('songs.show')
+    ->middleware('auth');

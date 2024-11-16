@@ -67,7 +67,7 @@
 import { Head, Link } from '@inertiajs/vue3'
 import Icon from '@/Shared/Icon.vue'
 import pickBy from 'lodash/pickBy'
-import Layout from '@/Shared/Layout.vue'
+import Layout from '@/Shared/Layout/DashboardLayout.vue'
 import throttle from 'lodash/throttle'
 import mapValues from 'lodash/mapValues'
 import Pagination from '@/Shared/Pagination.vue'

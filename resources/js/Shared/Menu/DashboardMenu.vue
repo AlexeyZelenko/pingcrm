@@ -3,7 +3,13 @@
     <div class="mb-4">
       <Link class="group flex items-center py-3" href="/">
         <icon name="dashboard" class="mr-2 w-4 h-4" :class="isUrl('') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />
-        <div :class="isUrl('') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Dashboard</div>
+        <div :class="isUrl('') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Home</div>
+      </Link>
+    </div>
+    <div class="mb-4">
+      <Link class="group flex items-center py-3" href="/songs">
+        <icon name="dashboard" class="mr-2 w-4 h-4" :class="isUrl('songs') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />
+        <div :class="isUrl('songs') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Songs</div>
       </Link>
     </div>
     <div class="mb-4">
