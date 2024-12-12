@@ -12,11 +12,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      # Настройка SSH для подключения к серверу
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.5.3
         with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY_SONGS_AWS }}
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY_SONGS_AWS }}  # Добавьте ваш SSH ключ в GitHub Secrets
 
+      # Деплой на EC2 сервер
       - name: Deploy to EC2
         run: |
           ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_PUBLIC_IP }} << 'EOF'
@@ -27,11 +29,13 @@ jobs:
             sudo systemctl restart nginx
           EOF
 
+      # Настройка git пользователя для коммитов через GitHub Actions
       - name: Configure git user
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
+      # Отправка изменений обратно в GitHub
       - name: Push changes to GitHub
         run: |
           git add .
