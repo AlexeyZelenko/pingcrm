@@ -3,7 +3,7 @@ name: Deploy to AWS EC2
 on:
   push:
     branches:
-      - master  # Замените на вашу основную ветку
+      - master  # Убедитесь, что это ваша основная ветка (если она называется main, используйте main)
 
 jobs:
   deploy:
@@ -19,9 +19,9 @@ jobs:
 
       - name: Deploy to EC2
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@your-ec2-public-ip << 'EOF'
+          ssh -o StrictHostKeyChecking=no ubuntu@54.175.30.219 << 'EOF'
             cd /var/www/pingcrm
-            git pull origin main
+            git pull origin master  # Или main, если ваша ветка называется main
             composer install --no-dev --optimize-autoloader
             php artisan migrate --seed
             sudo systemctl restart nginx
