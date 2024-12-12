@@ -3,7 +3,7 @@ name: Deploy to AWS EC2
 on:
   push:
     branches:
-      - master  # Убедитесь, что это ваша основная ветка (если она называется main, используйте main)
+      - master  # Или main, если ваша основная ветка называется main
 
 jobs:
   deploy:
@@ -19,10 +19,21 @@ jobs:
 
       - name: Deploy to EC2
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@54.175.30.219 << 'EOF'
+          ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_PUBLIC_IP }} << 'EOF'
             cd /var/www/pingcrm
             git pull origin master  # Или main, если ваша ветка называется main
             composer install --no-dev --optimize-autoloader
             php artisan migrate --seed
             sudo systemctl restart nginx
           EOF
+
+      - name: Configure git user
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Push changes to GitHub
+        run: |
+          git add .
+          git commit -m "Fix code styling"
+          git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/AlexeyZelenko/pingcrm.git HEAD:master
