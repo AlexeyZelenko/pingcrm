@@ -43,7 +43,7 @@
         <div class="mt-6">
           <span class="text-gray-600 font-semibold">Описание:</span>
           <p class="text-gray-700 bg-gray-50 p-4 rounded-md shadow-sm mt-2">
-            {{ song.description || 'Нет описания' }}
+            {{ song.description || 'Нет описания.' }}
           </p>
         </div>
       </div>
