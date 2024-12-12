@@ -18,4 +18,8 @@ export default defineConfig({
             },
         }),
     ],
+    define: {
+        'process.env.VITE_APP_URL': JSON.stringify(process.env.VITE_APP_URL),
+    },
 });
+
