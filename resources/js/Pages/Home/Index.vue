@@ -1,7 +1,7 @@
 <template>
   <div>
     <Head title="Про сайт пісень" />
-    <h1 class="mb-8 text-3xl font-bold">Про сайт пісень.</h1>
+    <h1 class="mb-8 text-3xl font-bold">Про сайт пісень</h1>
 
     <!-- Блок 1: Привітання -->
     <section class="mb-10">
